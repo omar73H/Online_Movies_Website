@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //the actual code for the project.
 //------------------------------------------------------------------------------------------------------------------
 app.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('login', { title: 'Express' });
 });
 //------------------------------------------------------------------------------------------------------------------
 
