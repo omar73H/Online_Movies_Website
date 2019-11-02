@@ -17,6 +17,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {
   res.render('login', { title: 'Express' });
 });
+app.get('/registration',function(req,res){
+  res.render('registration');
+});
+var old = fs.readFileSync("users.json");
+var users = JSON.parse(old); ;var i = users.length;
+app.post('/register',function(req,res){
+  var user_name = req.body.username;
+  var pass = req.body.password;
+  var r = fs.readFileSync("users.json");
+  var arr = JSON.parse(r);
+  var f = false ;
+  for(var i = 0 ; i < users.length ; i++){
+    if (user_name == users[i].username)
+      f = true;
+  }
+  if(!f){
+  var user = {username : user_name , password : pass};
+  users[i++] = user ;
+  fs.writeFileSync("users.json",JSON.stringify(users));
+  res.render('home');
+  }
+  else {
+    document.getElementById("demo").innerHTML = "username is already used";
+  }
+});
 //------------------------------------------------------------------------------------------------------------------
 
 // examples for getting pages by requesting the server (app).-----------------------------------
