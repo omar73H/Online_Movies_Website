@@ -29,7 +29,7 @@ app.get('/temp2', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-  res.send("AAAAAAAAAAAAA");
+  res.render("home");
 });
 
 /*var myObj = {name : "Aman" , age : 21};
