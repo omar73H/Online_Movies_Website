@@ -36,11 +36,38 @@ app.post('/register',function(req,res){
   var user = {username : user_name , password : pass};
   users[i++] = user ;
   fs.writeFileSync("users.json",JSON.stringify(users));
-  res.render('home');
+  res.render('login');
   }
   else {
-    document.getElementById("demo").innerHTML = "username is already used";
+   // document.getElementById("demo").innerHTML = "username is already used";
   }
+});
+app.get('/drama',function(req,res){
+  res.render('drama');
+});
+app.get('/horror',function(req,res){
+  res.render('horror');
+});
+app.get('/action',function(req,res){
+  res.render('action');
+});
+app.get('/godfather',function(req,res){
+  res.render('godfather');
+});
+app.get('/godfather2',function(req,res){
+  res.render('godfather2');
+});
+app.get('/scream',function(req,res){
+  res.render('scream');
+});
+app.get('/conjuring',function(req,res){
+  res.render('conjuring');
+});
+app.get('/fightclub',function(req,res){
+  res.render('fightclub');
+});
+app.get('/darkknight',function(req,res){
+  res.render('darkknight');
 });
 //------------------------------------------------------------------------------------------------------------------
 
