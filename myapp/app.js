@@ -17,8 +17,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res) {
   res.render('login', { title: 'Express' });
 });
+app.post('/', function(req, res) {
+  res.render("home");
+});
+app.post('/login',function(req,res){
+  res.render('home');
+});
 app.get('/registration',function(req,res){
-  res.render('registration');
+  res.render('registration',{error : ""});
+});
+app.get('/login',function(req,res){
+  res.render('login');
 });
 var old = fs.readFileSync("users.json");
 var users = JSON.parse(old); ;var i = users.length;
@@ -28,6 +37,10 @@ app.post('/register',function(req,res){
   var r = fs.readFileSync("users.json");
   var arr = JSON.parse(r);
   var f = false ;
+  if(user_name == "" || pass == ""){
+    res.render('registration',{error : "You must fill all the requied Informations"});
+  }
+  else{
   for(var i = 0 ; i < users.length ; i++){
     if (user_name == users[i].username)
       f = true;
@@ -36,11 +49,13 @@ app.post('/register',function(req,res){
   var user = {username : user_name , password : pass};
   users[i++] = user ;
   fs.writeFileSync("users.json",JSON.stringify(users));
-  res.render('login');
+  res.render('registration',{error : "Successfully registered"});
   }
   else {
+   // console.log(f);
    // document.getElementById("demo").innerHTML = "username is already used";
-  }
+    res.render('registration',{error : "username is already used"});
+  }}
 });
 app.get('/drama',function(req,res){
   res.render('drama');
@@ -72,17 +87,7 @@ app.get('/darkknight',function(req,res){
 //------------------------------------------------------------------------------------------------------------------
 
 // examples for getting pages by requesting the server (app).-----------------------------------
-app.get('/temp', function(req, res) {
-  res.render('temp', { title: 'Express' });
-});
 
-app.get('/temp2', function(req, res) {
-  res.send("Aman Allah");
-});
-
-app.post('/', function(req, res) {
-  res.render("home");
-});
 
 /*var myObj = {name : "Aman" , age : 21};
 console.log(myObj);
@@ -94,5 +99,10 @@ var obj = JSON.parse(r);
 console.log(obj);*/
 //end of the examples.---------------------------------------------------------------------------
 
-app.listen(3000);
+//to run local and online 
+if(process.env.PORT)
+  app.listen(process.env.PORT);
+else
+  app.listen(3000);
+
 module.exports = app;

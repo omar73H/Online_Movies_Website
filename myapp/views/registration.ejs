@@ -20,6 +20,10 @@
             color: white;
             -webkit-text-stroke: 0.5px black;
         }
+        .error{
+            color: red;
+            font-size: 15px;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,9 +45,9 @@
             <input type="password" id="password" name="password"> <br> <br>
             <input type="submit" id="simple_click" class="btn btn-secondary" value="Register"> <br>
         </form>
-    </div>
-    <div>
-        <p id="demo"></p>
+        <br>
+        <a href="login">I have an account</a>
+        <p class='error'><%= error %></p>
     </div>
 </body>
 
