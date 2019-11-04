@@ -30,7 +30,8 @@ app.get('/login',function(req,res){
   res.render('login');
 });
 var old = fs.readFileSync("users.json");
-var users = JSON.parse(old); ;var i = users.length;
+
+users = JSON.parse(old); ;var i = users.length;
 app.post('/register',function(req,res){
   var user_name = req.body.username;
   var pass = req.body.password;
