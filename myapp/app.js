@@ -20,43 +20,56 @@ app.get('/', function(req, res) {
 app.post('/', function(req, res) {
   res.render("home");
 });
+app.get('/login',function(req,res){
+  res.render('login');
+});
 app.post('/login',function(req,res){
   res.render('home');
 });
 app.get('/registration',function(req,res){
   res.render('registration',{error : ""});
 });
-app.get('/login',function(req,res){
-  res.render('login');
-});
 var old = fs.readFileSync("users.json");
-
-users = JSON.parse(old); ;var i = users.length;
+if(old == "")
+{
+  old = "[]";
+}
+var users = JSON.parse(old);
+var i = users.length;
 app.post('/register',function(req,res){
   var user_name = req.body.username;
   var pass = req.body.password;
-  var r = fs.readFileSync("users.json");
-  var arr = JSON.parse(r);
+//  var r = fs.readFileSync("users.json");
+//  var arr = JSON.parse(r);
   var f = false ;
-  if(user_name == "" || pass == ""){
+  if(user_name == "" || pass == "")
+  {
     res.render('registration',{error : "You must fill all the requied Informations"});
   }
-  else{
-  for(var i = 0 ; i < users.length ; i++){
-    if (user_name == users[i].username)
-      f = true;
+  else
+  {
+    for(var k = 0 ; k < users.length ; k++)
+    {
+      if (user_name == users[k].username)
+      {
+        f = true;
+        break;
+      }
+    }
+    if(!f)
+    {
+      var user = {username : user_name , password : pass};
+      users[i++] = user ;
+      fs.writeFileSync("users.json",JSON.stringify(users));
+      res.render('registration',{error : "Successfully registered"});
+    }
+    else 
+    {
+    // console.log(f);
+    // document.getElementById("demo").innerHTML = "username is already used";
+      res.render('registration',{error : "username is already used"});
+    }
   }
-  if(!f){
-  var user = {username : user_name , password : pass};
-  users[i++] = user ;
-  fs.writeFileSync("users.json",JSON.stringify(users));
-  res.render('registration',{error : "Successfully registered"});
-  }
-  else {
-   // console.log(f);
-   // document.getElementById("demo").innerHTML = "username is already used";
-    res.render('registration',{error : "username is already used"});
-  }}
 });
 app.get('/drama',function(req,res){
   res.render('drama');
