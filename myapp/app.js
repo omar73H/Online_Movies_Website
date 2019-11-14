@@ -148,6 +148,9 @@ app.get('/fightclub',function(req,res){
 app.get('/darkknight',function(req,res){
   res.render('darkknight');
 });
+app.get('/watchlist',function(req,res){
+  res.render('watchlist');
+});
 //------------------------------------------------------------------------------------------------------------------
 
 // examples for getting pages by requesting the server (app).-----------------------------------
