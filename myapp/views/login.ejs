@@ -19,6 +19,10 @@
             color: white;
             -webkit-text-stroke: 0.5px black;
         }
+        .error{
+            color: red;
+            font-size: 15px;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,6 +48,7 @@
         </form>
         <br>
         <a href="registration">I dont have an account</a>
+        <p class='error'><%= error %></p>
     </div>
 </body>
 </html>

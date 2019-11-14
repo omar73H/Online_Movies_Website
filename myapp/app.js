@@ -15,17 +15,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 //the actual code for the project.
 //------------------------------------------------------------------------------------------------------------------
 app.get('/', function(req, res) {
-  res.render('login', { title: 'Express' });
+  res.render('login',{error : ""});
 });
-app.post('/', function(req, res) {
-  res.render("home");
-});
+//app.post('/', function(req, res) {
+  //res.render("home");
+//});
 app.get('/login',function(req,res){
-  res.render('login');
+  res.render('login',{error : ""});
 });
-app.post('/login',function(req,res){
-  res.render('home');
-});
+//app.post('/login',function(req,res){
+ // res.render('home');
+//});
 app.get('/registration',function(req,res){
   res.render('registration',{error : ""});
 });
@@ -44,7 +44,7 @@ app.post('/register',function(req,res){
   var f = false ;
   if(user_name == "" || pass == "")
   {
-    res.render('registration',{error : "You must fill all the requied Informations"});
+    res.render('registration',{error : "You must fill all the requied Informations try to login again"});
   }
   else
   {
@@ -61,7 +61,7 @@ app.post('/register',function(req,res){
       var user = {username : user_name , password : pass};
       users[i++] = user ;
       fs.writeFileSync("users.json",JSON.stringify(users));
-      res.render('registration',{error : "Successfully registered"});
+      res.render('registration',{error : "Successfully registered , Now You can Login"});
     }
     else 
     {
@@ -70,6 +70,56 @@ app.post('/register',function(req,res){
       res.render('registration',{error : "username is already used"});
     }
   }
+});
+app.post('/',function(req,res){
+  var user_name = req.body.username;
+  var pass = req.body.password;
+//  var r = fs.readFileSync("users.json");
+//  var arr = JSON.parse(r);
+  var f = false ;
+  for(var k = 0 ; k < users.length ; k++)
+    {
+      if (user_name == users[k].username && pass == users[k].password)
+      {
+        f = true;
+        break;
+      }
+    }
+  if(f)
+    {
+      res.render('home');
+    }
+  else 
+    {
+    // console.log(f);
+    // document.getElementById("demo").innerHTML = "username is already used";
+      res.render('login',{error : "You Entered unvalid username or password"});
+    }
+});
+app.post('/login',function(req,res){
+  var user_name = req.body.username;
+  var pass = req.body.password;
+//  var r = fs.readFileSync("users.json");
+//  var arr = JSON.parse(r);
+  var f = false ;
+  for(var k = 0 ; k < users.length ; k++)
+    {
+      if (user_name == users[k].username && pass == users[k].password)
+      {
+        f = true;
+        break;
+      }
+    }
+  if(f)
+    {
+      res.render('home');
+    }
+  else 
+    {
+    // console.log(f);
+    // document.getElementById("demo").innerHTML = "username is already used";
+      res.render('login',{error :"You Entered unvalid username or password"});
+    }
 });
 app.get('/drama',function(req,res){
   res.render('drama');
