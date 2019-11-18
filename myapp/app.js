@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
+var session = require('express-session');
 
 var app = express();
 
@@ -11,11 +12,20 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: 'max',saveUninitialized: false,resave: false}));
 
 //the actual code for the project.
 //------------------------------------------------------------------------------------------------------------------
+const isLogedIn = (req,res,next) => {
+  if(!req.session.username){
+    res.redirect('login');
+  }
+  else{
+    next();
+  }
+}
 app.get('/', function(req, res) {
-  res.render('login',{error : ""});
+  res.redirect('login');
 });
 //app.post('/', function(req, res) {
   //res.render("home");
@@ -23,6 +33,9 @@ app.get('/', function(req, res) {
 app.get('/login',function(req,res){
   res.render('login',{error : ""});
 });
+app.get('/home',isLogedIn,function(req,res){
+  res.render('home');
+})
 //app.post('/login',function(req,res){
  // res.render('home');
 //});
@@ -58,7 +71,7 @@ app.post('/register',function(req,res){
     }
     if(!f)
     {
-      var user = {username : user_name , password : pass};
+      var user = {username : user_name , password : pass,watchlist : []};
       users[i++] = user ;
       fs.writeFileSync("users.json",JSON.stringify(users));
       res.render('registration',{error : "Successfully registered , Now You can Login"});
@@ -70,31 +83,6 @@ app.post('/register',function(req,res){
       res.render('registration',{error : "username is already used"});
     }
   }
-});
-app.post('/',function(req,res){
-  var user_name = req.body.username;
-  var pass = req.body.password;
-//  var r = fs.readFileSync("users.json");
-//  var arr = JSON.parse(r);
-  var f = false ;
-  for(var k = 0 ; k < users.length ; k++)
-    {
-      if (user_name == users[k].username && pass == users[k].password)
-      {
-        f = true;
-        break;
-      }
-    }
-  if(f)
-    {
-      res.render('home');
-    }
-  else 
-    {
-    // console.log(f);
-    // document.getElementById("demo").innerHTML = "username is already used";
-      res.render('login',{error : "You Entered unvalid username or password"});
-    }
 });
 app.post('/login',function(req,res){
   var user_name = req.body.username;
@@ -112,7 +100,8 @@ app.post('/login',function(req,res){
     }
   if(f)
     {
-      res.render('home');
+      req.session.username = user_name;
+      res.redirect('home');
     }
   else 
     {
@@ -121,34 +110,34 @@ app.post('/login',function(req,res){
       res.render('login',{error :"You Entered unvalid username or password"});
     }
 });
-app.get('/drama',function(req,res){
+app.get('/drama',isLogedIn,function(req,res){
   res.render('drama');
 });
-app.get('/horror',function(req,res){
+app.get('/horror',isLogedIn,function(req,res){
   res.render('horror');
 });
-app.get('/action',function(req,res){
+app.get('/action',isLogedIn,function(req,res){
   res.render('action');
 });
-app.get('/godfather',function(req,res){
+app.get('/godfather',isLogedIn,function(req,res){
   res.render('godfather');
 });
-app.get('/godfather2',function(req,res){
+app.get('/godfather2',isLogedIn,function(req,res){
   res.render('godfather2');
 });
-app.get('/scream',function(req,res){
+app.get('/scream',isLogedIn,function(req,res){
   res.render('scream');
 });
-app.get('/conjuring',function(req,res){
+app.get('/conjuring',isLogedIn,function(req,res){
   res.render('conjuring');
 });
-app.get('/fightclub',function(req,res){
+app.get('/fightclub',isLogedIn,function(req,res){
   res.render('fightclub');
 });
-app.get('/darkknight',function(req,res){
+app.get('/darkknight',isLogedIn,function(req,res){
   res.render('darkknight');
 });
-app.get('/watchlist',function(req,res){
+app.get('/watchlist',isLogedIn,function(req,res){
   res.render('watchlist');
 });
 //------------------------------------------------------------------------------------------------------------------
