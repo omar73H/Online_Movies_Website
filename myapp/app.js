@@ -68,18 +68,18 @@ var i = users.length; // i is pointing after the last element
 
 // when I get a post request in the registration page I do the following
 app.post('/register',function(req,res){
-  var user_name = req.body.username;
-  var pass = req.body.password;
+  var user_name = req.body.username; // I get the username
+  var pass = req.body.password; // I get the passwword 
 //  var r = fs.readFileSync("users.json");
 //  var arr = JSON.parse(r);
-  var f = false ;
-  if(user_name == "" || pass == "")
+  var f = false ; // I create a flag
+  if(user_name == "" || pass == "") // if user does not fill the required info
   {
-    res.render('registration',{error : "You must fill all the requied Informations try to login again"});
+    res.render('registration',{error : "You must fill all the required Informations try to register again"});
   }
   else
   {
-    for(var k = 0 ; k < users.length ; k++)
+    for(var k = 0 ; k < users.length ; k++) // I will check if the username already exists
     {
       if (user_name == users[k].username)
       {
@@ -87,12 +87,12 @@ app.post('/register',function(req,res){
         break;
       }
     }
-    if(!f)
+    if(!f) // if not already exists
     {
-      var user = {username : user_name , password : pass,watchlist : []};
-      users[i++] = user ;
-      fs.writeFileSync("users.json",JSON.stringify(users));
-      res.render('registration',{error : "Successfully registered , Now You can Login"});
+      var user = {username : user_name , password : pass,watchlist : []}; // make a new account for its info
+      users[i++] = user ; // put it at the last position in my JSON DB and point after it by i
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('registration',{error : "Successfully registered , Now You can Login"}); // show a successful message
     }
     else 
     {
@@ -102,63 +102,87 @@ app.post('/register',function(req,res){
     }
   }
 });
+
+// when the users want to login
 app.post('/login',function(req,res){
-  var user_name = req.body.username;
-  var pass = req.body.password;
+  var user_name = req.body.username; // get the username
+  var pass = req.body.password; // get the password
 //  var r = fs.readFileSync("users.json");
 //  var arr = JSON.parse(r);
-  var f = false ;
-  for(var k = 0 ; k < users.length ; k++)
+  var f = false ; // have a flag initially false
+  for(var k = 0 ; k < users.length ; k++) // iterate on each account in my JSON DB to check for valid login
+  {
+    if (user_name == users[k].username && pass == users[k].password)
     {
-      if (user_name == users[k].username && pass == users[k].password)
-      {
-        f = true;
-        break;
-      }
+      f = true;
+      break;
     }
-  if(f)
-    {
-      req.session.username = user_name;
-     // sessionStorage.setItem(user_name);
-      res.redirect('home');
-    }
+  }
+  if(f) // if correct cardinalities (i.e username and password)
+  {
+    req.session.username = user_name; // I think "make a new session for the user identified by its username"
+    // sessionStorage.setItem(user_name);
+    res.redirect('home'); // redirect him to the home page
+  }
   else 
-    {
+  {
     // console.log(f);
     // document.getElementById("demo").innerHTML = "username is already used";
-      res.render('login',{error :"You Entered unvalid username or password"});
-    }
+    res.render('login',{error :"You Entered invalid username or password"}); // invalid login message
+  }
 });
+
+// if logged users want to open Drama then render it
 app.get('/drama',isLogedIn,function(req,res){
   res.render('drama');
 });
+
+// if logged users want to open horror then render it
 app.get('/horror',isLogedIn,function(req,res){
   res.render('horror');
 });
+
+// if logged users want to open action then render it
 app.get('/action',isLogedIn,function(req,res){
   res.render('action');
 });
+
+// if logged users want to open godfather then render it
 app.get('/godfather',isLogedIn,function(req,res){
   res.render('godfather');
 });
+
+//// if logged users want to open godfather2 then render it
 app.get('/godfather2',isLogedIn,function(req,res){
   res.render('godfather2');
 });
+
+// if logged users want to open Scream then render it
 app.get('/scream',isLogedIn,function(req,res){
   res.render('scream');
 });
+
+// if logged users want to open conjuring then render it
 app.get('/conjuring',isLogedIn,function(req,res){
   res.render('conjuring');
 });
+
+// if logged users want to open fightclub then render it
 app.get('/fightclub',isLogedIn,function(req,res){
   res.render('fightclub');
 });
+
+// if logged users want to open darkknight then render it
 app.get('/darkknight',isLogedIn,function(req,res){
   res.render('darkknight');
 });
+
+// if logged users want to open ---->(their watchlist)<---- then render it
 app.get('/watchlist',isLogedIn,function(req,res){
   res.render('watchlist');
 });
+
+// if logged users want to add conjuring to his/her watchlist then ....
 app.post('/conjuring',isLogedIn,function(req,res){
   console.log(req.session.username);
 });
