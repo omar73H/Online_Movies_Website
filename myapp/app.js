@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'max',saveUninitialized: false,resave: false}));
+app.use(session({secret: 'max',saveUninitialized: true,resave: false}));
 
 //the actual code for the project.
 //------------------------------------------------------------------------------------------------------------------
@@ -101,6 +101,7 @@ app.post('/login',function(req,res){
   if(f)
     {
       req.session.username = user_name;
+     // sessionStorage.setItem(user_name);
       res.redirect('home');
     }
   else 
@@ -139,6 +140,9 @@ app.get('/darkknight',isLogedIn,function(req,res){
 });
 app.get('/watchlist',isLogedIn,function(req,res){
   res.render('watchlist');
+});
+app.post('/conjuring',isLogedIn,function(req,res){
+  console.log(req.session.username);
 });
 //------------------------------------------------------------------------------------------------------------------
 
