@@ -37,6 +37,27 @@
             font-size: 15px;
             left: 30px;
         }
+        p3{
+            position: relative;
+            color:blue ;
+            font-size: 20px;
+            left: 100px;
+        }
+        .container3 {
+            position: fixed;
+            left: 700px;
+            top: 150px;
+            color: white;
+            width: 300px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .container1 {
+            position: fixed;
+            left: 100px;
+            top: 150px;
+            color: white;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,14 +83,14 @@
             </form>
         </div>
     </nav>
-    <div>
+    <div class="container1">
         <br><br>
         <p1> =>The Results for Searching for "<%= results[0] %>":- </p1>
         <br>
         <p2> (About  <%= results.length-1 %>  results)</p2>
         <br><br>
         <%  if(results.length == 1){%>     
-            <a href="#">"Movie is not found"</a>
+            <p3 href="#">"Movie is not found"</p3>
         <%}%>
         <% for(var i = 1; i < results.length; i++){ %>
             <p> <%=i%>) <%= results[i] %> 
@@ -94,4 +115,7 @@
             </p>
         <% } %>
     </div>
+    <div class="container3">
+            <img id="image" src="/search.png" width="150%" height="150%">
+        </div>
 </body>
