@@ -27,7 +27,7 @@ const isLogedIn = (req,res,next) => {
 
 // if the user writes our URL then redirects him/her to the login page
 app.get('/', function(req, res) {
-  res.redirect('login');
+  res.redirect('/login');
 });
 
 // if the user asks directly for the login page then render it to him/her
@@ -56,13 +56,17 @@ app.get('/register',function(req,res){
 app.get('/registration',function(req,res){
   res.render('registration',{error : ""});
 });
+
+// old reads the old_database from the JSON file
 var old = fs.readFileSync("users.json");
 if(old == "")
 {
   old = "[]";
 }
-var users = JSON.parse(old);
-var i = users.length;
+var users = JSON.parse(old); // array of users by parsing the JSON file string 
+var i = users.length; // i is pointing after the last element
+
+// when I get a post request in the registration page I do the following
 app.post('/register',function(req,res){
   var user_name = req.body.username;
   var pass = req.body.password;
