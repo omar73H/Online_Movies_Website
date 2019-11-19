@@ -16,6 +16,9 @@ app.use(session({secret: 'max',saveUninitialized: true,resave: false}));
 
 //the actual code for the project.
 //------------------------------------------------------------------------------------------------------------------
+var films = ["The Conjuring (2013)","The Dark Knight (2008)","Fight Club (1999)","The Godfather (1972)",
+              "The Godfather: Part II (1974)","Scream (1996)"];
+
 const isLogedIn = (req,res,next) => {
   if(!req.session.username){
     res.redirect('/login');
@@ -32,7 +35,7 @@ const redirectHome = (req,res,next) => {
   else{
     next();
   }
-}
+};
 
 // if the user writes our URL then redirects him/her to the login page
 app.get('/', redirectHome ,function(req, res) {
@@ -139,23 +142,6 @@ app.post('/login', redirectHome ,function(req,res){
     res.render('login',{error :"You Entered invalid username or password"}); // invalid login message
   }
 });
-app.post('/search',function(req,res){
-  var movie = req.body.Search;
-var movies=["conjuring","darkknight","godfather","godfather2","scream","fightclub"];
-var choosen=[];
-var count=0;
-var idx=0;
-for (let index = 0; index < movies.length; index++) {
-  if(movies[index].includes(movie)&&movie.length!=0){
-    count++;
-    choosen[idx++]=movies[index];
-  }
-
-}
-res.render('searchresults',{allMovies:choosen});
-   
-});
-   
 
 // if logged users want to open Drama then render it
 app.get('/drama',isLogedIn,function(req,res){
@@ -309,6 +295,18 @@ app.post('/logout',isLogedIn,(req,res) =>{
     }
     res.redirect('/login');
   })
+});
+//Search Bar----------------------------------------------------------------------------------------
+app.post('/search',isLogedIn,function(req,res){
+  var word = req.body.Search;
+  var results = [];
+  results.push(word);
+  films.forEach(function(film){
+    if((film.toLowerCase()).includes(word)){
+      results.push(film);
+    }
+  });
+  res.render('searchresults',{results : results});
 });
 //------------------------------------------------------------------------------------------------------------------
 
