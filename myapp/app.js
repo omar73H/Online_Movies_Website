@@ -131,6 +131,23 @@ app.post('/login',function(req,res){
     res.render('login',{error :"You Entered invalid username or password"}); // invalid login message
   }
 });
+app.post('/search',function(req,res){
+  var movie = req.body.Search;
+var movies=["conjuring","darkknight","godfather","godfather2","scream","fightclub"];
+var choosen=[];
+var count=0;
+var idx=0;
+for (let index = 0; index < movies.length; index++) {
+  if(movies[index].includes(movie)&&movie.length!=0){
+    count++;
+    choosen[idx++]=movies[index];
+  }
+
+}
+res.render('searchresults',{allMovies:choosen});
+   
+});
+   
 
 // if logged users want to open Drama then render it
 app.get('/drama',isLogedIn,function(req,res){
