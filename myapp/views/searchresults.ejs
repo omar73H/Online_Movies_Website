@@ -13,9 +13,29 @@
             text-align: center;
             -webkit-text-stroke: 1px blue;
         }
-        a{
+        p1{
+            position: relative;
+            color:green ;
+            font-size: 25px;
+            left: 30px;
+        }
+        p2{
+            position: relative;
             color:slateblue ;
-            font-size: 30px;
+            font-size: 15px;
+            left: 95px
+        }
+        p{
+            position: relative;
+            color:slateblue ;
+            font-size: 20px;
+            left: 50px;
+        }
+        a{
+            position: relative;
+            color:blue ;
+            font-size: 15px;
+            left: 30px;
         }
     </style>
     <meta charset="UTF-8">
@@ -42,35 +62,36 @@
             </form>
         </div>
     </nav>
-</body>
-<%  if(allMovies.length == 0){%>
-                     
-    <a href="#">Movie not found</a>
+    <div>
+        <br><br>
+        <p1> =>The Results for Searching for "<%= results[0] %>":- </p1>
+        <br>
+        <p2> (About  <%= results.length-1 %>  results)</p2>
+        <br><br>
+        <%  if(results.length == 1){%>     
+            <a href="#">"Movie is not found"</a>
         <%}%>
-        <%for(var i=0 ; i<allMovies.length ; i++){%>
-            <%  if(allMovies[i] == "darkknight"){%>
-                     
-                <button onclick="location.href = '/darkknight';" id="darkknight" class="btn btn-secondary ml-3">darkknight</button>
+        <% for(var i = 1; i < results.length; i++){ %>
+            <p> <%=i%>) <%= results[i] %> 
+            <% if(results[i] == "The Dark Knight (2008)"){%>
+                <a href="/darkknight">(More info)</a>
                 <%}%>
-                      
-                <%  if(allMovies[i] == "fightclub"){%>
-                     
-                      <button onclick="location.href = '/fightclub';" id="fightclub" class="btn btn-secondary ml-3"> fightclub </button>
-                      <%}%>
-                      
-                     <%   if(allMovies[i] == 'godfather'){%>
-                    
-                      <button onclick="location.href = '/godfather';" id="godfather" class="btn btn-secondary ml-3"> godfather </button>
-                      <%}%>
-                      <%   if(allMovies[i] == 'godfather2'){%>
-                     
-                      <button onclick="location.href = '/godfather2';" id="godfather2" class="btn btn-secondary ml-3"> godfather2 </button>
-                      <%}%>
-                      <%  if(allMovies[i] == 'scream'){%>
-                    
-                      <button onclick="location.href = '/scream';" id="scream" class="btn btn-secondary ml-3"> scream </button>
-                      <%}%>
-                      <% if(allMovies[i] == 'conjuring'){%>
-                      <button onclick="location.href = '/conjuring';" id="conjuring" class="btn btn-secondary ml-3"> conjuring </button>   
-                      <%}%>
-                      <%}%>
+            <% if(results[i] == "The Conjuring (2013)"){%>
+                <a href="/conjuring">(More info)</a>
+                 <%}%>
+            <% if(results[i] == "Fight Club (1999)"){%>
+                <a href="/fightclub">(More info)</a>
+                <%}%>
+            <% if(results[i] == "The Godfather (1972)"){%>
+                <a href="/godfather">(More info)</a>
+                <%}%>
+            <% if(results[i] == "The Godfather: Part II (1974)"){%>
+                <a href="/godfather2">(More info)</a>
+                <%}%>
+            <% if(results[i] == "Scream (1996)"){%>
+                <a href="/scream">(More info)</a>
+                <%}%>
+            </p>
+        <% } %>
+    </div>
+</body>
