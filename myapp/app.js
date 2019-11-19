@@ -18,7 +18,16 @@ app.use(session({secret: 'max',saveUninitialized: true,resave: false}));
 //------------------------------------------------------------------------------------------------------------------
 const isLogedIn = (req,res,next) => {
   if(!req.session.username){
-    res.redirect('login');
+    res.redirect('/login');
+  }
+  else{
+    next();
+  }
+}
+
+const redirectHome = (req,res,next) => {
+  if(req.session.username){
+    res.redirect('/home');
   }
   else{
     next();
@@ -26,12 +35,12 @@ const isLogedIn = (req,res,next) => {
 }
 
 // if the user writes our URL then redirects him/her to the login page
-app.get('/', function(req, res) {
+app.get('/', redirectHome ,function(req, res) {
   res.redirect('/login');
 });
 
 // if the user asks directly for the login page then render it to him/her
-app.get('/login',function(req,res){
+app.get('/login', redirectHome ,function(req,res){
   res.render('login',{error : ""});
 });
 
@@ -49,11 +58,11 @@ app.get('/home',isLogedIn,function(req,res){
 // we redirect him/her to '/registration'
 // in the following two methods we do the following:
 // if the user asks to enter the registration page so render it to him/her
-app.get('/register',function(req,res){
+app.get('/register', redirectHome ,function(req,res){
   res.redirect('/registration');
 });
 
-app.get('/registration',function(req,res){
+app.get('/registration', redirectHome ,function(req,res){
   res.render('registration',{error : ""});
 });
 
@@ -67,7 +76,7 @@ var users = JSON.parse(old); // array of users by parsing the JSON file string
 var i = users.length; // i is pointing after the last element
 
 // when I get a post request in the registration page I do the following
-app.post('/register',function(req,res){
+app.post('/register', redirectHome ,function(req,res){
   var user_name = req.body.username; // I get the username
   var pass = req.body.password; // I get the passwword 
 //  var r = fs.readFileSync("users.json");
@@ -93,6 +102,7 @@ app.post('/register',function(req,res){
       users[i++] = user ; // put it at the last position in my JSON DB and point after it by i
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('registration',{error : "Successfully registered , Now You can Login"}); // show a successful message
+     // req.session.username = user_name;
     }
     else 
     {
@@ -104,11 +114,9 @@ app.post('/register',function(req,res){
 });
 
 // when the users want to login
-app.post('/login',function(req,res){
+app.post('/login', redirectHome ,function(req,res){
   var user_name = req.body.username; // get the username
   var pass = req.body.password; // get the password
-//  var r = fs.readFileSync("users.json");
-//  var arr = JSON.parse(r);
   var f = false ; // have a flag initially false
   for(var k = 0 ; k < users.length ; k++) // iterate on each account in my JSON DB to check for valid login
   {
@@ -120,9 +128,9 @@ app.post('/login',function(req,res){
   }
   if(f) // if correct cardinalities (i.e username and password)
   {
-    req.session.username = user_name; // I think "make a new session for the user identified by its username"
+    req.session.username = user_name; // make a new session for the user identified by its username
     // sessionStorage.setItem(user_name);
-    res.redirect('home'); // redirect him to the home page
+    res.redirect('/home'); // redirect him to the home page
   }
   else 
   {
@@ -169,39 +177,138 @@ app.get('/godfather',isLogedIn,function(req,res){
   res.render('godfather');
 });
 
+//if logged users want to add godfather to their watchlists
+app.post('/godfather',isLogedIn,function(req,res){
+  var currUser = req.session.username
+  for(var k=0 ; k<users.length ; k++)
+  {
+    if(currUser == users[k].username)
+    {
+      users[k].watchlist.push("godfather");
+      break;
+    }
+  }
+  res.render('godfather');
+});
+
+
 //// if logged users want to open godfather2 then render it
 app.get('/godfather2',isLogedIn,function(req,res){
   res.render('godfather2');
 });
+
+//if logged users want to add godfather2 to their watchlists
+app.post('/godfather2',isLogedIn,function(req,res){
+  var currUser = req.session.username
+  for(var k=0 ; k<users.length ; k++)
+  {
+    if(currUser == users[k].username)
+    {
+      users[k].watchlist.push("godfather");
+      break;
+    }
+  }
+  res.render('godfather2');
+});
+
 
 // if logged users want to open Scream then render it
 app.get('/scream',isLogedIn,function(req,res){
   res.render('scream');
 });
 
+
+//if logged users want to add scream to their watchlists
+app.post('/scream',isLogedIn,function(req,res){
+  var currUser = req.session.username
+  for(var k=0 ; k<users.length ; k++)
+  {
+    if(currUser == users[k].username)
+    {
+      users[k].watchlist.push("scream");
+      break;
+    }
+  }
+  res.render('scream');
+});
+
+
 // if logged users want to open conjuring then render it
 app.get('/conjuring',isLogedIn,function(req,res){
   res.render('conjuring');
 });
+
+
+//if logged users want to add conjuring to their watchlists
+app.post('/conjuring',isLogedIn,function(req,res){
+  var currUser = req.session.username
+  for(var k=0 ; k<users.length ; k++)
+  {
+    if(currUser == users[k].username)
+    {
+      users[k].watchlist.push("conjuring");
+      break;
+    }
+  }
+  res.render('conjuring');
+});
+
 
 // if logged users want to open fightclub then render it
 app.get('/fightclub',isLogedIn,function(req,res){
   res.render('fightclub');
 });
 
+
+//if logged users want to add fightclub to their watchlists
+app.post('/fightclub',isLogedIn,function(req,res){
+  var currUser = req.session.username
+  for(var k=0 ; k<users.length ; k++)
+  {
+    if(currUser == users[k].username)
+    {
+      users[k].watchlist.push("fightclub");
+      break;
+    }
+  }
+  res.render('fightclub');
+});
+
+
 // if logged users want to open darkknight then render it
 app.get('/darkknight',isLogedIn,function(req,res){
   res.render('darkknight');
 });
+
+
+//if logged users want to add darkknight to their watchlists
+app.post('/darkknight',isLogedIn,function(req,res){
+  var currUser = req.session.username
+  for(var k=0 ; k<users.length ; k++)
+  {
+    if(currUser == users[k].username)
+    {
+      users[k].watchlist.push("darkknight");
+      break;
+    }
+  }
+  res.render('darkknight');
+});
+
 
 // if logged users want to open ---->(their watchlist)<---- then render it
 app.get('/watchlist',isLogedIn,function(req,res){
   res.render('watchlist');
 });
 
-// if logged users want to add conjuring to his/her watchlist then ....
-app.post('/conjuring',isLogedIn,function(req,res){
-  console.log(req.session.username);
+app.post('/logout',isLogedIn,(req,res) =>{
+  req.session.destroy(err =>{
+    if(err)
+    {
+      res.redirect('/home');
+    }
+    res.redirect('/login');
+  })
 });
 //------------------------------------------------------------------------------------------------------------------
 
