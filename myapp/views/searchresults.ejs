@@ -39,4 +39,34 @@
         </div>
     </nav>
 </body>
-</html>
+<%  if(allMovies.length == 0){%>
+                     
+    <a href="#">Movie not found</a>
+        <%}%>
+        <%for(var i=0 ; i<allMovies.length ; i++){%>
+            <%  if(allMovies[i] == "darkknight"){%>
+                     
+                <button onclick="location.href = '/darkknight';" id="darkknight" class="btn btn-secondary ml-3">darkknight</button>
+                <%}%>
+                      
+                <%  if(allMovies[i] == "fightclub"){%>
+                     
+                      <button onclick="location.href = '/fightclub';" id="fightclub" class="btn btn-secondary ml-3"> fightclub </button>
+                      <%}%>
+                      
+                     <%   if(allMovies[i] == 'godfather'){%>
+                    
+                      <button onclick="location.href = '/godfather';" id="godfather" class="btn btn-secondary ml-3"> godfather </button>
+                      <%}%>
+                      <%   if(allMovies[i] == 'godfather2'){%>
+                     
+                      <button onclick="location.href = '/godfather2';" id="godfather2" class="btn btn-secondary ml-3"> godfather2 </button>
+                      <%}%>
+                      <%  if(allMovies[i] == 'scream'){%>
+                    
+                      <button onclick="location.href = '/scream';" id="scream" class="btn btn-secondary ml-3"> scream </button>
+                      <%}%>
+                      <% if(allMovies[i] == 'conjuring'){%>
+                      <button onclick="location.href = '/conjuring';" id="conjuring" class="btn btn-secondary ml-3"> conjuring </button>   
+                      <%}%>
+                      <%}%>
