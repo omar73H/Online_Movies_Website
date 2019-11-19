@@ -24,21 +24,35 @@ const isLogedIn = (req,res,next) => {
     next();
   }
 }
+
+// if the user writes our URL then redirects him/her to the login page
 app.get('/', function(req, res) {
   res.redirect('login');
 });
-//app.post('/', function(req, res) {
-  //res.render("home");
-//});
+
+// if the user asks directly for the login page then render it to him/her
 app.get('/login',function(req,res){
   res.render('login',{error : ""});
 });
+
+// I think "if the user asks for the home page and he/she is already logged in then render it to him/her"
 app.get('/home',isLogedIn,function(req,res){
   res.render('home');
 })
-//app.post('/login',function(req,res){
- // res.render('home');
-//});
+
+// NOTE : we have an error when the user type this URL "http://localhost:3000/register"
+//that's error is because the user is allowed to enter the registration page by two differenr URLs namely
+//1)"http://localhost:3000/register" && 2) "http://localhost:3000/registration"
+// SO let's fix it
+//we can do the following
+// when the user types the URL "http://localhost:3000/register"
+// we redirect him/her to '/registration'
+// in the following two methods we do the following:
+// if the user asks to enter the registration page so render it to him/her
+app.get('/register',function(req,res){
+  res.redirect('/registration');
+});
+
 app.get('/registration',function(req,res){
   res.render('registration',{error : ""});
 });
