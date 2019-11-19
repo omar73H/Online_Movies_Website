@@ -166,15 +166,26 @@ app.get('/godfather',isLogedIn,function(req,res){
 //if logged users want to add godfather to their watchlists
 app.post('/godfather',isLogedIn,function(req,res){
   var currUser = req.session.username
+  loop:
   for(var k=0 ; k<users.length ; k++)
   {
     if(currUser == users[k].username)
     {
-      users[k].watchlist.push("godfather");
+      var userWatchlist = users[k].watchlist;
+      for(var j=0; j<userWatchlist.length ; j++)
+      {
+        if(userWatchlist[j] == "godfather")
+        {
+          res.render('godfather') //+ error message
+          break loop;
+        }
+      }
+      userWatchlist.push("godfather"); // + successuflly added
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('godfather');
       break;
     }
   }
-  res.render('godfather');
 });
 
 
@@ -186,15 +197,26 @@ app.get('/godfather2',isLogedIn,function(req,res){
 //if logged users want to add godfather2 to their watchlists
 app.post('/godfather2',isLogedIn,function(req,res){
   var currUser = req.session.username
+  loop:
   for(var k=0 ; k<users.length ; k++)
   {
     if(currUser == users[k].username)
     {
-      users[k].watchlist.push("godfather");
+      var userWatchlist = users[k].watchlist;
+      for(var j=0; j<userWatchlist.length ; j++)
+      {
+        if(userWatchlist[j] == "godfather2")
+        {
+          res.render('godfather2') //+ error message
+          break loop;
+        }
+      }
+      userWatchlist.push("godfather2"); // + successfully added
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('godfather2');
       break;
     }
   }
-  res.render('godfather2');
 });
 
 
@@ -207,15 +229,26 @@ app.get('/scream',isLogedIn,function(req,res){
 //if logged users want to add scream to their watchlists
 app.post('/scream',isLogedIn,function(req,res){
   var currUser = req.session.username
+  loop:
   for(var k=0 ; k<users.length ; k++)
   {
     if(currUser == users[k].username)
     {
-      users[k].watchlist.push("scream");
+      var userWatchlist = users[k].watchlist;
+      for(var j=0; j<userWatchlist.length ; j++)
+      {
+        if(userWatchlist[j] == "scream")
+        {
+          res.render('scream') //+ error message
+          break loop;
+        }
+      }
+      userWatchlist.push("scream");
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('scream');
       break;
     }
   }
-  res.render('scream');
 });
 
 
@@ -228,15 +261,26 @@ app.get('/conjuring',isLogedIn,function(req,res){
 //if logged users want to add conjuring to their watchlists
 app.post('/conjuring',isLogedIn,function(req,res){
   var currUser = req.session.username
+  loop:
   for(var k=0 ; k<users.length ; k++)
   {
     if(currUser == users[k].username)
     {
-      users[k].watchlist.push("conjuring");
+      var userWatchlist = users[k].watchlist;
+      for(var j=0; j<userWatchlist.length ; j++)
+      {
+        if(userWatchlist[j] == "conjuring")
+        {
+          res.render('conjuring') //+ error message
+          break loop;
+        }
+      }
+      userWatchlist.push("conjuring");
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('conjuring');
       break;
     }
   }
-  res.render('conjuring');
 });
 
 
@@ -246,18 +290,30 @@ app.get('/fightclub',isLogedIn,function(req,res){
 });
 
 
-//if logged users want to add fightclub to their watchlists
+// if logged users want to add fightclub to their watchlists
 app.post('/fightclub',isLogedIn,function(req,res){
   var currUser = req.session.username
+  console.log(currUser);
+  loop:
   for(var k=0 ; k<users.length ; k++)
   {
     if(currUser == users[k].username)
     {
-      users[k].watchlist.push("fightclub");
+      var userWatchlist = users[k].watchlist;
+      for(var j=0; j<userWatchlist.length ; j++)
+      {
+        if(userWatchlist[j] == "fightclub")
+        {
+          res.render('fightclub') //+ error message
+          break loop;
+        }
+      }
+      userWatchlist.push("fightclub");
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('fightclub');
       break;
     }
   }
-  res.render('fightclub');
 });
 
 
@@ -270,15 +326,26 @@ app.get('/darkknight',isLogedIn,function(req,res){
 //if logged users want to add darkknight to their watchlists
 app.post('/darkknight',isLogedIn,function(req,res){
   var currUser = req.session.username
+  loop:
   for(var k=0 ; k<users.length ; k++)
   {
     if(currUser == users[k].username)
     {
-      users[k].watchlist.push("darkknight");
+      var userWatchlist = users[k].watchlist;
+      for(var j=0; j<userWatchlist.length ; j++)
+      {
+        if(userWatchlist[j] == "darkknight")
+        {
+          res.render('darkknight') //+ error message
+          break loop;
+        }
+      }
+      userWatchlist.push("darkknight");
+      fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
+      res.render('darkknight');
       break;
     }
   }
-  res.render('darkknight');
 });
 
 
