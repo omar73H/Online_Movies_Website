@@ -16,6 +16,9 @@ app.use(session({secret: 'max',saveUninitialized: true,resave: false}));
 
 //the actual code for the project.
 //------------------------------------------------------------------------------------------------------------------
+var films = [{name :"The Conjuring (2013)",link : "/conjuring"},{name :"The Dark Knight (2008)",link : "/darkknight"}
+              ,{name :"Fight Club (1999)",link : "/fightclub"},{name  :"The Godfather (1972)",link :  '/godfather'},
+              {name :"The Godfather: Part II (1974)",link : "godfather2"},{name :"Scream (1996)",link : "/scream"}];
 const isLogedIn = (req,res,next) => {
   if(!req.session.username){
     res.redirect('login');
@@ -185,6 +188,18 @@ app.get('/watchlist',isLogedIn,function(req,res){
 // if logged users want to add conjuring to his/her watchlist then ....
 app.post('/conjuring',isLogedIn,function(req,res){
   console.log(req.session.username);
+});
+//Search Bar----------------------------------------------------------------------------------------
+app.post('/search',isLogedIn,function(req,res){
+  var word = req.body.Search;
+  var results = [];
+  films.forEach(function(film){
+    if((film.name.toLowerCase()).includes(word)){
+      results.push(film);
+    }
+  });
+  //console.log(results);
+  res.render('searchresults',{results : results});
 });
 //------------------------------------------------------------------------------------------------------------------
 
