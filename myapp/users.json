@@ -1,1 +1,4 @@
-[{"username":"omar","password":"hatem","watchlist":[]},{"username":"aman","password":"1234","watchlist":["The Dark Knight (2008)","Fight Club (1999)","The Godfather: Part II (1974)"]},{"username":"kemoo","password":"kemoo","watchlist":["The Dark Knight (2008)","Scream (1996)","The Godfather (1972)"]}]
+<<<<<<< HEAD
+[{"username":"omar","password":"hatem","watchlist":[]},{"username":"aman","password":"1234","watchlist":["The Dark Knight (2008)","Fight Club (1999)","The Godfather: Part II (1974)","The Godfather (1972)"]},{"username":"kemoo","password":"kemoo","watchlist":["The Dark Knight (2008)","Scream (1996)","The Godfather (1972)"]}]
+=======
+>>>>>>> 533ae1d88ea3f81162b85afd8e1a08987af7f07e
