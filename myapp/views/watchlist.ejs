@@ -54,7 +54,8 @@
                 <p style ="color:MediumSeaGreen">No Movies in your watchlist</p>
             <%}%>
             <% for(var i = 0; i < userWatchlist.length; i++){ %>
-                <p style ="color:MediumSeaGreen"> <%=i%>) <%= userWatchlist[i] %> 
+                <p style ="color:MediumSeaGreen"> <%=(i+1)%>) <%= userWatchlist[i] %>
+
                 <% if(userWatchlist[i] == "The Dark Knight (2008)"){%>
                     <a href="/darkknight">(More info)</a>
                     <%}%>
@@ -77,7 +78,7 @@
             <% } %>
         </div>
         <div class="container3">
-                <img id="image" src="/mike.png" width="150%" height="150%">
+                <img id="image" src="/mike.png" width="175%" height="175%">
         </div> 
 </body>
 </html>

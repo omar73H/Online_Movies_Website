@@ -350,10 +350,10 @@ app.post('/darkknight',isLogedIn,function(req,res){
 
 // if logged users want to open ---->(their watchlist)<---- then render it
 app.get('/watchlist',isLogedIn,function(req,res){
-  var currUser = req.session.username; // get the username of whom wanting his/her watchlist 
+  var currUser = req.session.username; // get the username of whom wanting his/her watchlist
   for(var k=0; k<users.length ;k++)
   {
-    if(currUser = users[k].username) 
+    if(currUser == users[k].username) 
     {
       var userWatchlist = users[k].watchlist; // get its saved watchlist array
       break;
