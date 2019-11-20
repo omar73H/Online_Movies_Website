@@ -42,6 +42,11 @@
             left: 80px;
             top: 370px;
         }
+        .logoutAndHome {
+            position: fixed;
+            left: 200px;
+            top: 500px;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +101,9 @@
     <div class="watchlist">
         <button onclick="location.href = '/watchlist';" id="watchlist" class="btn btn-secondary ml-3" style="width: 300px;">My Watchlist</button>
     </div>
+
     <div>
+    <div class="logoutAndHome">
         <form method="post" action="/logout">
             <button>Logout</button>
         </form>

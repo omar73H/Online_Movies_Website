@@ -41,6 +41,11 @@
             left: 65px;
             top: 470px;
         }
+        .logoutAndHome {
+            position: fixed;
+            left: 175px;
+            top: 570px;
+        }
         .error{
             color: red;
             font-size: 15px;
@@ -92,5 +97,14 @@
              src="https://www.youtube.com/embed/EXeTwQWrcwY?">
         </iframe>
     </div>
+    <div>
+            <div class="logoutAndHome">    
+                <form method="get" action="/home">
+                   <button>Home</button>
+                </form>
+                <form method="post" action="/logout">
+                    <button>Logout</button>
+                </form>    
+            </div>
 </body>
 </html>
