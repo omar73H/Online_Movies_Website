@@ -175,13 +175,13 @@ app.post('/godfather',isLogedIn,function(req,res){
       {
         if(userWatchlist[j] == "The Godfather (1972)") // if added 
         {
-          res.render('godfather') //  error message and do not add anything
+          res.render('godfather' , {error : "INVALID REQUEST: This film is already in your watchlist"}) //  error message and do not add anything
           break loop;
         }
       }
       userWatchlist.push("The Godfather (1972)"); // + successuflly added
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
-      res.render('godfather');
+      res.render('godfather' , {error:"The film is added successfully to your watchlist"});
       break;
     }
   }
@@ -206,13 +206,13 @@ app.post('/godfather2',isLogedIn,function(req,res){
       {
         if(userWatchlist[j] == "The Godfather: Part II (1974)")
         {
-          res.render('godfather2') //+ error message
+          res.render('godfather2', {error : "INVALID REQUEST: This film is already in your watchlist"}) //+ error message
           break loop;
         }
       }
       userWatchlist.push("The Godfather: Part II (1974)"); // + successfully added
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
-      res.render('godfather2');
+      res.render('godfather2', {error:"The film is added successfully to your watchlist"});
       break;
     }
   }
@@ -238,13 +238,13 @@ app.post('/scream',isLogedIn,function(req,res){
       {
         if(userWatchlist[j] == "Scream (1996)")
         {
-          res.render('scream') //+ error message
+          res.render('scream' , {error : "INVALID REQUEST: This film is already in your watchlist"}) //+ error message
           break loop;
         }
       }
       userWatchlist.push("Scream (1996)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
-      res.render('scream');
+      res.render('scream', {error:"The film is added successfully to your watchlist"});
       break;
     }
   }
@@ -270,13 +270,13 @@ app.post('/conjuring',isLogedIn,function(req,res){
       {
         if(userWatchlist[j] == "The Conjuring (2013)")
         {
-          res.render('conjuring') //+ error message
+          res.render('conjuring' , {error : "INVALID REQUEST: This film is already in your watchlist"}) //+ error message
           break loop;
         }
       }
       userWatchlist.push("The Conjuring (2013)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
-      res.render('conjuring');
+      res.render('conjuring', {error:"The film is added successfully to your watchlist"});
       break;
     }
   }
@@ -303,13 +303,13 @@ app.post('/fightclub',isLogedIn,function(req,res){
       {
         if(userWatchlist[j] == "Fight Club (1999)")
         {
-          res.render('fightclub') //+ error message
+          res.render('fightclub' , {error : "INVALID REQUEST: This film is already in your watchlist"}) //+ error message
           break loop;
         }
       }
       userWatchlist.push("Fight Club (1999)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
-      res.render('fightclub');
+      res.render('fightclub', {error:"The film is added successfully to your watchlist"});
       break;
     }
   }
@@ -335,13 +335,13 @@ app.post('/darkknight',isLogedIn,function(req,res){
       {
         if(userWatchlist[j] == "The Dark Knight (2008)")
         {
-          res.render('darkknight') //+ error message
+          res.render('darkknight' , {error : "INVALID REQUEST: This film is already in your watchlist"}) //+ error message
           break loop;
         }
       }
       userWatchlist.push("The Dark Knight (2008)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
-      res.render('darkknight');
+      res.render('darkknight',{error:"The film is added successfully to your watchlist"});
       break;
     }
   }

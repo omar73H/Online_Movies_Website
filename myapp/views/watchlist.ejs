@@ -13,6 +13,14 @@
             text-align: center;
             -webkit-text-stroke: 1px blue;
         }
+        .container3 {
+            position: fixed;
+            left: 700px;
+            top: 150px;
+            color: white;
+            width: 300px;
+            text-align: justify;
+            text-justify: inter-word;
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,10 +51,10 @@
             <h4> =>Your watchlist contains "<%= userWatchlist.length %>" elements:- </h4>
             <br><br>
             <%  if(userWatchlist.length == 0){%>     
-                <p>No Movies in your watchlist</p>
+                <p style ="color:MediumSeaGreen">No Movies in your watchlist</p>
             <%}%>
             <% for(var i = 0; i < userWatchlist.length; i++){ %>
-                <p> <%=i%>) <%= userWatchlist[i] %> 
+                <p style ="color:MediumSeaGreen"> <%=i%>) <%= userWatchlist[i] %> 
                 <% if(userWatchlist[i] == "The Dark Knight (2008)"){%>
                     <a href="/darkknight">(More info)</a>
                     <%}%>
@@ -68,8 +76,8 @@
                 </p>
             <% } %>
         </div>
-     <!--   <div class="container3">
+        <div class="container3">
                 <img id="image" src="/mike.jpg" width="150%" height="150%">
-            </div> -->
+        </div> 
 </body>
 </html>
