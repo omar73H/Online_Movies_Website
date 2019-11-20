@@ -292,7 +292,6 @@ app.get('/fightclub',isLogedIn,function(req,res){
 // if logged users want to add fightclub to their watchlists
 app.post('/fightclub',isLogedIn,function(req,res){
   var currUser = req.session.username
-  console.log(currUser);
   loop:
   for(var k=0 ; k<users.length ; k++)
   {
