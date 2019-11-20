@@ -159,7 +159,7 @@ app.get('/action',isLogedIn,function(req,res){
 
 // if logged users want to open godfather then render it
 app.get('/godfather',isLogedIn,function(req,res){
-  res.render('godfather');
+  res.render('godfather',{error : ""});
 });
 
 //if logged users want to add godfather to their watchlists
@@ -190,7 +190,7 @@ app.post('/godfather',isLogedIn,function(req,res){
 
 //// if logged users want to open godfather2 then render it
 app.get('/godfather2',isLogedIn,function(req,res){
-  res.render('godfather2');
+  res.render('godfather2',{error : ""});
 });
 
 //if logged users want to add godfather2 to their watchlists
@@ -221,7 +221,7 @@ app.post('/godfather2',isLogedIn,function(req,res){
 
 // if logged users want to open Scream then render it
 app.get('/scream',isLogedIn,function(req,res){
-  res.render('scream');
+  res.render('scream',{error : ""});
 });
 
 
@@ -253,7 +253,7 @@ app.post('/scream',isLogedIn,function(req,res){
 
 // if logged users want to open conjuring then render it
 app.get('/conjuring',isLogedIn,function(req,res){
-  res.render('conjuring');
+  res.render('conjuring',{error : ""});
 });
 
 
@@ -285,7 +285,7 @@ app.post('/conjuring',isLogedIn,function(req,res){
 
 // if logged users want to open fightclub then render it
 app.get('/fightclub',isLogedIn,function(req,res){
-  res.render('fightclub');
+  res.render('fightclub',{error : ""});
 });
 
 
@@ -318,7 +318,7 @@ app.post('/fightclub',isLogedIn,function(req,res){
 
 // if logged users want to open darkknight then render it
 app.get('/darkknight',isLogedIn,function(req,res){
-  res.render('darkknight');
+  res.render('darkknight',{error : ""});
 });
 
 
