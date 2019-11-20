@@ -174,13 +174,13 @@ app.post('/godfather',isLogedIn,function(req,res){
       var userWatchlist = users[k].watchlist;
       for(var j=0; j<userWatchlist.length ; j++)
       {
-        if(userWatchlist[j] == "godfather")
+        if(userWatchlist[j] == "The Godfather (1972)")
         {
           res.render('godfather') //+ error message
           break loop;
         }
       }
-      userWatchlist.push("godfather"); // + successuflly added
+      userWatchlist.push("The Godfather (1972)"); // + successuflly added
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('godfather');
       break;
@@ -205,13 +205,13 @@ app.post('/godfather2',isLogedIn,function(req,res){
       var userWatchlist = users[k].watchlist;
       for(var j=0; j<userWatchlist.length ; j++)
       {
-        if(userWatchlist[j] == "godfather2")
+        if(userWatchlist[j] == "The Godfather: Part II (1974)")
         {
           res.render('godfather2') //+ error message
           break loop;
         }
       }
-      userWatchlist.push("godfather2"); // + successfully added
+      userWatchlist.push("The Godfather: Part II (1974)"); // + successfully added
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('godfather2');
       break;
@@ -237,13 +237,13 @@ app.post('/scream',isLogedIn,function(req,res){
       var userWatchlist = users[k].watchlist;
       for(var j=0; j<userWatchlist.length ; j++)
       {
-        if(userWatchlist[j] == "scream")
+        if(userWatchlist[j] == "Scream (1996)")
         {
           res.render('scream') //+ error message
           break loop;
         }
       }
-      userWatchlist.push("scream");
+      userWatchlist.push("Scream (1996)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('scream');
       break;
@@ -269,13 +269,13 @@ app.post('/conjuring',isLogedIn,function(req,res){
       var userWatchlist = users[k].watchlist;
       for(var j=0; j<userWatchlist.length ; j++)
       {
-        if(userWatchlist[j] == "conjuring")
+        if(userWatchlist[j] == "The Conjuring (2013)")
         {
           res.render('conjuring') //+ error message
           break loop;
         }
       }
-      userWatchlist.push("conjuring");
+      userWatchlist.push("The Conjuring (2013)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('conjuring');
       break;
@@ -302,13 +302,13 @@ app.post('/fightclub',isLogedIn,function(req,res){
       var userWatchlist = users[k].watchlist;
       for(var j=0; j<userWatchlist.length ; j++)
       {
-        if(userWatchlist[j] == "fightclub")
+        if(userWatchlist[j] == "Fight Club (1999)")
         {
           res.render('fightclub') //+ error message
           break loop;
         }
       }
-      userWatchlist.push("fightclub");
+      userWatchlist.push("Fight Club (1999)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('fightclub');
       break;
@@ -334,13 +334,13 @@ app.post('/darkknight',isLogedIn,function(req,res){
       var userWatchlist = users[k].watchlist;
       for(var j=0; j<userWatchlist.length ; j++)
       {
-        if(userWatchlist[j] == "darkknight")
+        if(userWatchlist[j] == "The Dark Knight (2008)")
         {
           res.render('darkknight') //+ error message
           break loop;
         }
       }
-      userWatchlist.push("darkknight");
+      userWatchlist.push("The Dark Knight (2008)");
       fs.writeFileSync("users.json",JSON.stringify(users)); // save my new JSON DB
       res.render('darkknight');
       break;
@@ -351,7 +351,16 @@ app.post('/darkknight',isLogedIn,function(req,res){
 
 // if logged users want to open ---->(their watchlist)<---- then render it
 app.get('/watchlist',isLogedIn,function(req,res){
-  res.render('watchlist');
+  var currUser = req.session.username;
+  for(var k=0; k<users.length ;k++)
+  {
+    if(currUser = users[k].username)
+    {
+      var userWatchlist = users[k].watchlist;
+      break;
+    }
+  }
+  res.render('watchlist',{userWatchlist : userWatchlist});
 });
 
 app.post('/logout',isLogedIn,(req,res) =>{

@@ -38,5 +38,38 @@
             </form>
         </div>
     </nav>
+    <div class="container1">
+            <br><br>
+            <h4> =>Your watchlist contains "<%= userWatchlist.length %>" elements:- </h4>
+            <br><br>
+            <%  if(userWatchlist.length == 0){%>     
+                <p>No Movies in your watchlist</p>
+            <%}%>
+            <% for(var i = 0; i < userWatchlist.length; i++){ %>
+                <p> <%=i%>) <%= userWatchlist[i] %> 
+                <% if(userWatchlist[i] == "The Dark Knight (2008)"){%>
+                    <a href="/darkknight">(More info)</a>
+                    <%}%>
+                <% if(userWatchlist[i] == "The Conjuring (2013)"){%>
+                    <a href="/conjuring">(More info)</a>
+                     <%}%>
+                <% if(userWatchlist[i] == "Fight Club (1999)"){%>
+                    <a href="/fightclub">(More info)</a>
+                    <%}%>
+                <% if(userWatchlist[i] == "The Godfather (1972)"){%>
+                    <a href="/godfather">(More info)</a>
+                    <%}%>
+                <% if(userWatchlist[i] == "The Godfather: Part II (1974)"){%>
+                    <a href="/godfather2">(More info)</a>
+                    <%}%>
+                <% if(userWatchlist[i] == "Scream (1996)"){%>
+                    <a href="/scream">(More info)</a>
+                    <%}%>
+                </p>
+            <% } %>
+        </div>
+     <!--   <div class="container3">
+                <img id="image" src="/mike.jpg" width="150%" height="150%">
+            </div> -->
 </body>
 </html>
